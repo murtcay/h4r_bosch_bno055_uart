@@ -4,9 +4,10 @@
 #include <boost/detail/endian.hpp>
 
 
-#define    ACCEL_FCT 1000.0
+#define    ACCEL_FCT 100.0
 #define    MAG_FCT 16.0
 #define    GYRO_FCT 900.0
+#define    QUATER_FCT 16384.0
 
 
 /**
@@ -164,10 +165,10 @@ int BoschBno055Uart::run()
 			msg_imu_.angular_velocity.x=((double)(imu_data.imu.GyroscopeDataX))/GYRO_FCT;
 			msg_imu_.angular_velocity.y=((double)(imu_data.imu.GyroscopeDataY))/GYRO_FCT;
 			msg_imu_.angular_velocity.z=((double)(imu_data.imu.GyroscopeDataZ))/GYRO_FCT;
-			msg_imu_.orientation.x=((double)(imu_data.imu.QuaternionxData));
-			msg_imu_.orientation.y=((double)(imu_data.imu.QuaternionyData));
-			msg_imu_.orientation.z=((double)(imu_data.imu.QuaternionzData));
-			msg_imu_.orientation.w=((double)(imu_data.imu.QuaternionwData));
+			msg_imu_.orientation.x=((double)(imu_data.imu.QuaternionxData))/QUATER_FCT;
+			msg_imu_.orientation.y=((double)(imu_data.imu.QuaternionyData))/QUATER_FCT;
+			msg_imu_.orientation.z=((double)(imu_data.imu.QuaternionzData))/QUATER_FCT;
+			msg_imu_.orientation.w=((double)(imu_data.imu.QuaternionwData))/QUATER_FCT;
 
 			//Magnetometer
 			msg_mag_.header.stamp=ros::Time::now();
